@@ -61,6 +61,13 @@ G.add_nodes_from([1, 2, 3, 4, 5])
 # Добавление рёбер, то есть задание бинарного отношения, т.е. подмножества A*A
 A=[(1, 3), (2, 3), (2, 1),(5,4),(1,5),(2,3)]
 
+print(check_reflexivity(A))
+print(check_irreflexivity(A))
+print(check_symmetry(A))
+print(check_antisymmetry(A))
+print(check_linearity(A))
+
+
 G.add_edges_from(A)
 
 # Визуализация графа
