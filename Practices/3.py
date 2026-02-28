@@ -83,3 +83,43 @@ nx.draw(G2, pos=pos2,with_labels=True, node_size=200, arrows=True, node_color="l
 nx.draw(G4, with_labels=True, node_size=200,pos=pos4, arrows=True, node_color="orange",font_size=10,font_weight="bold")
 #nx.draw(G5, with_labels=True, node_size=200,pos=pos5, arrows=True,node_color="green",font_size=10,font_weight="bold")
 plt.show()
+#-------
+import numpy as np
+import networkx as nx
+import matplotlib.pyplot as plt
+
+def plot_hasse(matrix):
+    n = len(matrix)
+    G = nx.DiGraph()
+
+    for i in range(n):
+        for j in range(n):
+            if matrix[i][j] == 1:
+                is_cover = True
+                for k in range(n):
+                    if matrix[i][k] == 1 and matrix[k][j] == 1:
+                        if k != i and k != j:
+                            is_cover = False
+                if is_cover:
+                    G.add_edge(i+1, j+1)
+
+    pos = nx.spring_layout(G)
+    nx.draw(G, pos, with_labels=True, node_size=700,
+            node_color="lightgreen", arrows=True,
+            font_weight="bold")
+    plt.title("Диаграмма Хассе")
+    plt.show()
+
+
+data = np.array([
+    [0, 1, 1, 1, 0, 0, 0,0],
+    [0, 0, 0, 0, 1, 1, 0,0],
+    [0, 0, 0, 0, 1, 0, 1,0],
+    [0, 0, 0, 0, 0, 1, 1,0],
+    [0, 0, 0, 0, 0, 0, 0,1],
+    [0, 0, 0, 0, 0, 0, 0,1],
+    [0, 0, 0, 0, 0, 0, 0,1],
+    [0, 0, 0, 0, 0, 0, 0,0]
+])
+
+plot_hasse(data)
